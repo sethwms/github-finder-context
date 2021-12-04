@@ -5,7 +5,7 @@ import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 
 const Users = ({ users, loading, hasSubmitted }) => {
-  if ((users.length === 0) & hasSubmitted) {
+  if ((users.length === 0) & hasSubmitted & !loading) {
     return <div>No results match your query.</div>;
   }
 
