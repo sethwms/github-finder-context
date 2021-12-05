@@ -1,9 +1,14 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 
-const User = ({ getUser, user, loading, getUserRepos, repos }) => {
+import GithubContext from "../../context/github/GithubContext";
+
+const User = () => {
+  const { getUser, user, loading, getUserRepos } = useContext(GithubContext);
+
   let { login } = useParams();
 
   useEffect(() => {
@@ -90,7 +95,7 @@ const User = ({ getUser, user, loading, getUserRepos, repos }) => {
           <div className="badge badge-dark">Public Gists: {public_gists}</div>
         </div>
         <div className="grid-3">
-          <Repos repos={repos} />
+          <Repos />
         </div>
       </Fragment>
     );

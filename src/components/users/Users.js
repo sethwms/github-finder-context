@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import UserItem from "./UserItem";
-
 import Spinner from "../layout/Spinner";
 
-const Users = ({ users, loading, hasSubmitted }) => {
+import GithubContext from "../../context/github/GithubContext";
+
+const Users = () => {
+  const { users, hasSubmitted, loading } = useContext(GithubContext);
+
   if ((users.length === 0) & hasSubmitted & !loading) {
     return <div>No results match your query.</div>;
   }

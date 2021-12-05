@@ -1,6 +1,8 @@
 import React from "react";
 
-const RepoItem = ({ repo: { name, description, html_url, homepage } }) => {
+const RepoItem = ({
+  repo: { name, description, html_url, homepage, updated_at },
+}) => {
   return (
     <div className="card">
       <h3>
@@ -10,6 +12,12 @@ const RepoItem = ({ repo: { name, description, html_url, homepage } }) => {
         <p>
           <strong>Description: </strong>
           {description}
+        </p>
+      ) : null}
+      {updated_at ? (
+        <p>
+          <strong>Last Updated: </strong>
+          {new Date(Date.parse(updated_at)).toLocaleString()}
         </p>
       ) : null}
       {homepage ? (

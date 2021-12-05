@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import GithubContext from "../../context/github/GithubContext";
 
-const Search = ({ setAlert, searchUsers, showClear, clearUsers }) => {
+const Search = ({ setAlert }) => {
+  const { searchUsers, users, clearUsers } = useContext(GithubContext);
+
   const [text, setText] = useState("");
 
   const onSubmit = (e) => {
@@ -33,7 +36,7 @@ const Search = ({ setAlert, searchUsers, showClear, clearUsers }) => {
           className="btn btn-dark btn-block"
         />
       </form>
-      {showClear && (
+      {users.length > 0 && (
         <button className="btn btn-light btn-block" onClick={clearUsers}>
           Clear
         </button>
