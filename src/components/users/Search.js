@@ -1,56 +1,45 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Search extends Component {
-  state = {
-    text: "",
-  };
+const Search = ({ setAlert, searchUsers, showClear, clearUsers }) => {
+  const [text, setText] = useState("");
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.text === "") {
-      this.props.setAlert("Please enter a query string.", "Light");
+    if (text === "") {
+      setAlert("Please enter a query string.", "Light");
     } else {
-      this.props.searchUsers(this.state.text);
-      this.setState({ text: "" });
+      searchUsers(text);
+      setText("");
     }
   };
 
-  onChange = ({ target: { value, name } }) => {
-    this.setState({ [name]: value });
+  const onChange = ({ target: { value } }) => {
+    setText(value);
   };
 
-  render() {
-    const {
-      props: { showClear, clearUsers },
-      state: { text },
-      onChange,
-      onSubmit,
-    } = this;
-
-    return (
-      <div>
-        <form onSubmit={onSubmit} className="form">
-          <input
-            type="text"
-            name="text"
-            placeholder="Search users..."
-            value={text}
-            onChange={onChange}
-          />
-          <input
-            type="submit"
-            value="search"
-            className="btn btn-dark btn-block"
-          />
-        </form>
-        {showClear && (
-          <button className="btn btn-light btn-block" onClick={clearUsers}>
-            Clear
-          </button>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={onSubmit} className="form">
+        <input
+          type="text"
+          name="text"
+          placeholder="Search users..."
+          value={text}
+          onChange={onChange}
+        />
+        <input
+          type="submit"
+          value="search"
+          className="btn btn-dark btn-block"
+        />
+      </form>
+      {showClear && (
+        <button className="btn btn-light btn-block" onClick={clearUsers}>
+          Clear
+        </button>
+      )}
+    </div>
+  );
+};
 
 export default Search;
