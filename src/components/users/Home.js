@@ -4,10 +4,10 @@ import Users from "./Users";
 
 const Home = () => {
   return (
-    <div>
+    <Fragment>
       <Search />
       <Users />
-    </div>
+    </Fragment>
   );
 };
 

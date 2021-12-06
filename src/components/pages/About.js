@@ -20,7 +20,7 @@ const About = () => {
       <p>
         The Github repo for this project can be found{" "}
         <a href="https://github.com/sethwms/github-finder-context">here</a>.
-        Please feel free to clone the project and examine it's construction to
+        Please feel free to clone the project and examine its construction to
         aid in your own learning.
       </p>
       <p>
