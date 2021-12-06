@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./layout/Navbar";
@@ -7,33 +7,27 @@ import Alert from "./layout/Alert";
 import About from "./pages/About";
 import User from "./users/User";
 
-import GithubState from "../context/github/GithubState";
+import AppState from "../context/AppState";
 
 import "../App.css";
 
 const App = () => {
-  const [alert, setAlert] = useState(null);
-
-  const showAlert = (msg, type) => {
-    setAlert({ msg, type });
-  };
-
   return (
-    <GithubState>
+    <AppState>
       <Router>
         <div className="App">
           <Navbar />
           <div className="container">
-            <Alert alert={alert} />
+            <Alert />
             <Routes>
-              <Route path="/" element={<Home setAlert={showAlert} />} />
+              <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/user/:login" element={<User />} />
             </Routes>
           </div>
         </div>
       </Router>
-    </GithubState>
+    </AppState>
   );
 };
 

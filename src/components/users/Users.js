@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 
-import GithubContext from "../../context/github/GithubContext";
+import AppContext from "../../context/AppContext";
 
 const Users = () => {
-  const { users, hasSubmitted, loading } = useContext(GithubContext);
+  const { users, hasSubmitted, loading } = useContext(AppContext);
 
   if ((users.length === 0) & hasSubmitted & !loading) {
     return <div>No results match your query.</div>;

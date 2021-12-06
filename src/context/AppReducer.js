@@ -3,9 +3,11 @@ import {
   SET_LOADING,
   CLEAR_USERS,
   GET_USER,
+  SET_ALERT,
+  REMOVE_ALERT,
   GET_REPOS,
   SET_HAS_SUBMITTED,
-} from "../types";
+} from "./types";
 
 // eslint-disable-next-line
 export default (state, action) => {
@@ -16,6 +18,7 @@ export default (state, action) => {
         users: action.payload,
         loading: false,
         hasSubmitted: true,
+        alert: null,
       };
     case SET_HAS_SUBMITTED:
       return {
@@ -45,6 +48,17 @@ export default (state, action) => {
         users: [],
         loading: false,
         hasSubmitted: false,
+      };
+    case SET_ALERT:
+      return {
+        ...state,
+        alert: action.payload,
+        loading: false,
+      };
+    case REMOVE_ALERT:
+      return {
+        ...state,
+        alert: null,
       };
     default:
       return state;

@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 import axios from "axios";
 
-import GithubContext from "./GithubContext";
-import GithubReducer from "./githubReducer";
+import AppContext from "./AppContext";
+import AppReducer from "./AppReducer";
 
 import {
   SEARCH_USERS,
@@ -11,22 +11,28 @@ import {
   GET_USER,
   GET_REPOS,
   SET_HAS_SUBMITTED,
-} from "../types";
+  SET_ALERT,
+  REMOVE_ALERT,
+} from "./types";
 
-const GithubState = (props) => {
+const AppState = (props) => {
   const initialState = {
     users: [],
     user: {},
     repos: [],
+    alert: null,
     loading: false,
+    hasSubmitted: false,
   };
 
-  const [state, dispatch] = useReducer(GithubReducer, initialState);
+  const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //SEARCH USER
   const searchUsers = async (text) => {
+    removeAlert();
     setLoading();
     setHasSubmitted();
+
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
       &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
@@ -83,22 +89,39 @@ const GithubState = (props) => {
     dispatch({ type: SET_LOADING });
   };
 
+  //Set Alert
+  const setAlert = (msg, type) => {
+    dispatch({
+      type: SET_ALERT,
+      payload: { msg, type },
+    });
+  };
+
+  //REMOVE ALERT
+  const removeAlert = () => {
+    dispatch({ type: REMOVE_ALERT });
+  };
+
   return (
-    <GithubContext.Provider
+    <AppContext.Provider
       value={{
         users: state.users,
         user: state.user,
         repos: state.repos,
         loading: state.loading,
+        hasSubmitted: state.hasSubmitted,
+        alert: state.alert,
         searchUsers,
         clearUsers,
         getUser,
         getUserRepos,
+        setAlert,
+        removeAlert,
       }}
     >
       {props.children}
-    </GithubContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export default GithubState;
+export default AppState;
