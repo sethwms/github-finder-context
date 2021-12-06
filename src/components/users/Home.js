@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Search from "./Search";
 import Users from "./Users";
 
-const Home = ({ setAlert }) => {
+const Home = () => {
   return (
     <div>
-      <Search setAlert={setAlert} />
+      <Search />
       <Users />
     </div>
   );

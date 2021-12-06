@@ -8,16 +8,15 @@ const RepoItem = ({
       <h3>
         <a href={html_url}>{name}</a>
       </h3>
+      {updated_at ? (
+        <h5>
+          Last Updated:{new Date(Date.parse(updated_at)).toLocaleString()}
+        </h5>
+      ) : null}{" "}
       {description ? (
         <p>
           <strong>Description: </strong>
           {description}
-        </p>
-      ) : null}
-      {updated_at ? (
-        <p>
-          <strong>Last Updated: </strong>
-          {new Date(Date.parse(updated_at)).toLocaleString()}
         </p>
       ) : null}
       {homepage ? (

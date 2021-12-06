@@ -4,10 +4,10 @@ import { useParams, Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 
-import GithubContext from "../../context/AppContext";
+import AppContext from "../../context/AppContext";
 
 const User = () => {
-  const { getUser, user, loading, getUserRepos } = useContext(GithubContext);
+  const { getUser, user, loading, getUserRepos } = useContext(AppContext);
 
   let { login } = useParams();
 
